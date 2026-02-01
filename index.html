@@ -3,51 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dino Game</title>
+    <title>Dino Photo Booth Game</title>
     <link rel="stylesheet" href="Dino.css">
 </head>
 <body>
-    <div id="photoBooth">
-        <h1>CHOOSE YOUR DINO</h1>
-        <div class="dino-grid">
-            <div class="dino-select selected" data-color="#4CAF50">
-                <div class="dino-img"></div>
+<div class="photo-booth-screen" id="photoBoothScreen">
+    <div class="photo-booth-content">
+        <h2>Choose Your Dino!</h2>
+        <p class="booth-subtitle">Pick a character for your adventure</p>
+        
+        <div class="photo-grid">
+            <div class="photo-option selected" data-color="#4CAF50">
+                <div class="photo-frame">
+                    <div class="photo-preview" style="background-color: #4CAF50"></div>
+                </div>
             </div>
-            <div class="dino-select" data-color="#ff6b6b">
-                <div class="dino-img"></div>
+            
+            <div class="photo-option" data-color="#ff6b6b">
+                <div class="photo-frame">
+                    <div class="photo-preview" style="background-color: #ff6b6b"></div>
+                </div>
             </div>
-            <div class="dino-select" data-color="#4ecdc4">
-                <div class="dino-img"></div>
+            
+            <div class="photo-option" data-color="#4ecdc4">
+                <div class="photo-frame">
+                    <div class="photo-preview" style="background-color: #4ecdc4"></div>
+                </div>
             </div>
-            <div class="dino-select" data-color="#ffe66d">
-                <div class="dino-img"></div>
+            
+            <div class="photo-option" data-color="#ffe66d">
+                <div class="photo-frame">
+                    <div class="photo-preview" style="background-color: #ffe66d"></div>
+                </div>
             </div>
         </div>
-        <button id="startGame">START GAME</button>
+        
+        <button class="start-game-btn" id="boothStartBtn">START GAME</button>
+    </div>
+</div>
+
+<div class="game-wrapper" id="gameWrapper" style="display: none;">
+    <div class="game-header">
+        <div class="score-display">
+            <div id="score">00000</div>
+            <div id="highScore">HI 00000</div>
+        </div>
+        <div class="game-title">DINO RUN</div>
+        <button class="change-dino-btn" id="changeDinoBtn">CHANGE DINO</button>
     </div>
 
-    <div id="gameContainer" style="display:none;">
-        <div class="game-header">
-            <div class="score">SCORE: <span id="score">0</span></div>
-            <button id="changeDino">CHANGE DINO</button>
-        </div>
-        <div class="game-area" id="gameArea">
-            <div id="dino"></div>
-            <div id="cactus"></div>
+    <div class="game-container">
+        <div class="game-screen" id="gameScreen">
+            <div class="dino" id="dino"></div>
+            <div class="cactus" id="cactus1"></div>
+            <div class="cactus" id="cactus2"></div>
             <div class="ground"></div>
-        </div>
-        <div class="game-over" id="gameOver">
-            <h2>GAME OVER</h2>
-            <p>SCORE: <span id="finalScore">0</span></p>
-            <button id="playAgain">PLAY AGAIN</button>
-            <button id="goMenu">MENU</button>
+            <div class="cloud"></div>
         </div>
     </div>
 
-    <script src="Dino.js"></script>
+    <div class="game-controls">
+        <button class="control-btn start-btn" id="startBtn">START</button>
+        <button class="control-btn pause-btn" id="pauseBtn" style="display:none;">PAUSE</button>
+        <button class="control-btn restart-btn" id="restartBtn">RESTART</button>
+    </div>
+
+    <div class="game-over-screen" id="gameOverScreen">
+        <div class="game-over-content">
+            <h2>GAME OVER</h2>
+            <div class="final-score">
+                <div class="score-label">SCORE</div>
+                <div class="score-value" id="finalScore">00000</div>
+            </div>
+            <div class="final-highscore">
+                <div class="score-label">HIGH SCORE</div>
+                <div class="score-value" id="finalHighScore">00000</div>
+            </div>
+            <button class="play-again-btn" id="playAgainBtn">PLAY AGAIN</button>
+            <button class="change-character-btn" id="changeCharacterBtn">CHANGE CHARACTER</button>
+        </div>
+    </div>
+
+    <div class="instructions">
+        <p>Desktop: Press SPACE to jump</p>
+        <p>Mobile: Tap screen to jump</p>
+    </div>
+</div>
+
+<script src="Dinijs"></script>
 </body>
 </html>
-
-
-
-
