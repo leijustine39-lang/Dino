@@ -466,6 +466,438 @@ body {
         width: 100px;
         height: 100px;
     }
+}    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.photo-booth-content h2 {
+    font-size: 42px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.booth-subtitle {
+    color: #666;
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+@media (min-width: 768px) {
+    .photo-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.photo-option {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.photo-option:hover {
+    transform: translateY(-10px);
+}
+
+.photo-option.selected {
+    transform: translateY(-10px) scale(1.05);
+}
+
+.photo-option.selected .photo-frame {
+    border-color: #4CAF50;
+    box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+}
+
+.photo-frame {
+    width: 150px;
+    height: 150px;
+    border: 5px solid #ddd;
+    border-radius: 20px;
+    margin: 0 auto;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.photo-preview {
+    width: 100%;
+    height: 100%;
+}
+
+.start-game-btn {
+    background: linear-gradient(to right, #4CAF50, #45a049);
+    color: white;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 200px;
+    margin-top: 20px;
+}
+
+.start-game-btn:hover {
+    background: linear-gradient(to right, #45a049, #388E3C);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(76, 175, 80, 0.4);
+}
+
+.game-wrapper {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 800px;
+    width: 100%;
+    position: relative;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #eee;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.score-display {
+    font-family: 'Courier New', monospace;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    background: #f8f9fa;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 2px solid #ddd;
+    display: flex;
+    gap: 20px;
+}
+
+.game-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    flex-grow: 1;
+    text-align: center;
+}
+
+.change-dino-btn {
+    background: linear-gradient(to right, #FF9800, #F57C00);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.change-dino-btn:hover {
+    background: linear-gradient(to right, #F57C00, #E65100);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
+}
+
+.game-container {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 5px solid #333;
+    position: relative;
+    height: 200px;
+    margin-bottom: 25px;
+    touch-action: manipulation;
+}
+
+.game-screen {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #87CEEB 0%, #98D8E8 100%);
+    cursor: pointer;
+}
+
+.ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 20px;
+    background: linear-gradient(to right, #8B4513, #A0522D, #8B4513);
+    z-index: 5;
+}
+
+.cloud {
+    position: absolute;
+    top: 40px;
+    right: -100px;
+    width: 80px;
+    height: 30px;
+    background: white;
+    border-radius: 40px;
+    animation: cloudMove 20s linear infinite;
+}
+
+.cloud::before,
+.cloud::after {
+    content: '';
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+}
+
+.cloud::before {
+    top: -12px;
+    left: 12px;
+    width: 30px;
+    height: 30px;
+}
+
+.cloud::after {
+    top: -8px;
+    right: 16px;
+    width: 24px;
+    height: 24px;
+}
+
+@keyframes cloudMove {
+    0% { right: -100px; }
+    100% { right: 100%; }
+}
+
+.cactus {
+    position: absolute;
+    bottom: 20px;
+    width: 40px;
+    height: 80px;
+    background: #4CAF50;
+    border-radius: 10px;
+    z-index: 10;
+    display: none;
+}
+
+.dino {
+    position: absolute;
+    left: 50px;
+    bottom: 20px;
+    width: 60px;
+    height: 80px;
+    z-index: 20;
+    background: #4CAF50;
+    border-radius: 10px;
+    transition: bottom 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.dino.jump {
+    bottom: 100px !important;
+}
+
+.game-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.control-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.start-btn {
+    background: linear-gradient(to right, #4CAF50, #45a049);
+    color: white;
+}
+
+.pause-btn {
+    background: linear-gradient(to right, #FF9800, #F57C00);
+    color: white;
+}
+
+.restart-btn {
+    background: linear-gradient(to right, #2196F3, #1976D2);
+    color: white;
+}
+
+.game-over-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    border-radius: 15px;
+}
+
+.game-over-content {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+
+.game-over-content h2 {
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 32px;
+}
+
+.final-score,
+.final-highscore {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.score-label {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.score-value {
+    font-family: 'Courier New', monospace;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+}
+
+.play-again-btn,
+.change-character-btn {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.play-again-btn {
+    background: linear-gradient(to right, #4CAF50, #45a049);
+    color: white;
+}
+
+.change-character-btn {
+    background: linear-gradient(to right, #FF9800, #F57C00);
+    color: white;
+}
+
+.instructions {
+    margin-top: 25px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.instructions p {
+    color: #666;
+    margin: 8px 0;
+}
+
+@media (max-width: 768px) {
+    .game-wrapper {
+        padding: 15px;
+    }
+    
+    .game-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .game-container {
+        height: 180px;
+    }
+    
+    .score-display {
+        font-size: 24px;
+        padding: 8px 16px;
+    }
+    
+    .game-title {
+        font-size: 28px;
+    }
+    
+    .photo-frame {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .dino {
+        left: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
+    .game-wrapper {
+        padding: 10px;
+    }
+    
+    .game-container {
+        height: 150px;
+    }
+    
+    .cactus {
+        width: 30px;
+        height: 60px;
+    }
+    
+    .dino {
+        width: 50px;
+        height: 70px;
+        left: 20px;
+    }
+    
+    .dino.jump {
+        bottom: 80px !important;
+    }
+    
+    .photo-booth-content {
+        padding: 20px;
+    }
+    
+    .photo-grid {
+        gap: 15px;
+    }
+    
+    .photo-frame {
+        width: 100px;
+        height: 100px;
+    }
     }    max-width: 800px;
     width: 100%;
     text-align: center;
@@ -1119,4 +1551,5 @@ body {
         height: 100px;
     }
 }
+
 
