@@ -5,7 +5,6 @@
     user-select: none;
 }
 
-
 body {
     font-family: 'Arial', sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -17,8 +16,141 @@ body {
     overflow-x: hidden;
 }
 
+.photo-booth-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+}
 
-/* Game wrapper */
+.photo-booth-content {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.photo-booth-content h2 {
+    font-size: 42px;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.booth-subtitle {
+    color: #666;
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+@media (min-width: 768px) {
+    .photo-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.photo-option {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.photo-option:hover {
+    transform: translateY(-10px);
+}
+
+.photo-option.selected {
+    transform: translateY(-10px) scale(1.05);
+}
+
+.photo-option.selected .photo-frame {
+    border-color: #4CAF50;
+    box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+}
+
+.photo-frame {
+    width: 150px;
+    height: 150px;
+    border: 5px solid #ddd;
+    border-radius: 20px;
+    margin: 0 auto 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.photo-preview {
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.photo-label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+}
+
+.booth-controls {
+    margin: 30px 0;
+}
+
+.start-game-btn {
+    background: linear-gradient(to right, #4CAF50, #45a049);
+    color: white;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 200px;
+}
+
+.start-game-btn:hover {
+    background: linear-gradient(to right, #45a049, #388E3C);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(76, 175, 80, 0.4);
+}
+
+.booth-hint {
+    color: #666;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
 .game-wrapper {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 20px;
@@ -27,10 +159,20 @@ body {
     max-width: 800px;
     width: 100%;
     position: relative;
+    animation: popIn 0.5s ease-out;
 }
 
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
 
-/* Header */
 .game-header {
     display: flex;
     justify-content: space-between;
@@ -38,8 +180,9 @@ body {
     margin-bottom: 25px;
     padding-bottom: 15px;
     border-bottom: 3px solid #eee;
+    flex-wrap: wrap;
+    gap: 15px;
 }
-
 
 .score-display {
     font-family: 'Courier New', monospace;
@@ -50,28 +193,47 @@ body {
     padding: 10px 20px;
     border-radius: 10px;
     border: 2px solid #ddd;
+    display: flex;
+    gap: 20px;
 }
-
 
 .game-title {
     font-size: 32px;
     font-weight: bold;
     color: #333;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    flex-grow: 1;
+    text-align: center;
 }
 
+.change-dino-btn {
+    background: linear-gradient(to right, #FF9800, #F57C00);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
 
-/* Game container */
+.change-dino-btn:hover {
+    background: linear-gradient(to right, #F57C00, #E65100);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
+}
+
 .game-container {
     background: white;
     border-radius: 15px;
     overflow: hidden;
     border: 5px solid #333;
     position: relative;
-    height: 300px;
+    height: 200px;
     margin-bottom: 25px;
 }
-
 
 .game-screen {
     width: 100%;
@@ -81,8 +243,6 @@ body {
     background: linear-gradient(to bottom, #87CEEB 0%, #98D8E8 100%);
 }
 
-
-/* Ground */
 .ground {
     position: absolute;
     bottom: 0;
@@ -92,20 +252,17 @@ body {
     z-index: 5;
 }
 
-
-/* Clouds */
 .cloud {
     position: absolute;
-    top: 60px;
+    top: 40px;
     right: -100px;
-    width: 100px;
-    height: 40px;
+    width: 80px;
+    height: 30px;
     background: white;
-    border-radius: 50px;
+    border-radius: 40px;
     animation: cloudMove 20s linear infinite;
     box-shadow: 0 5px 15px rgba(255, 255, 255, 0.5);
 }
-
 
 .cloud::before,
 .cloud::after {
@@ -115,22 +272,19 @@ body {
     border-radius: 50%;
 }
 
-
 .cloud::before {
-    top: -15px;
-    left: 15px;
-    width: 40px;
-    height: 40px;
-}
-
-
-.cloud::after {
-    top: -10px;
-    right: 20px;
+    top: -12px;
+    left: 12px;
     width: 30px;
     height: 30px;
 }
 
+.cloud::after {
+    top: -8px;
+    right: 16px;
+    width: 24px;
+    height: 24px;
+}
 
 @keyframes cloudMove {
     0% {
@@ -141,109 +295,38 @@ body {
     }
 }
 
-
-.cactus {
+.cactus.cactus-img {
     position: absolute;
     bottom: 20px;
     width: 40px;
     height: 80px;
-    background-color: #4CAF50;
-    border-radius: 5px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
     z-index: 10;
     display: none;
     transform: rotate(0deg) !important;
-    box-shadow: 
-        inset 5px 0 0 rgba(255, 255, 255, 0.3),
-        inset -5px 0 0 rgba(0, 0, 0, 0.2),
-        0 5px 10px rgba(0, 0, 0, 0.3);
 }
 
-
-/* First cactus */
 #cactus {
-    height: 90px;
-    background: linear-gradient(to right, #4CAF50, #45a049);
-    border-left: 3px solid #388E3C;
-    border-right: 3px solid #2E7D32;
+    background-image: url('cactus.png'); /* Add mo cactus dine */
 }
 
-
-/* Cactus top/head */
-#cactus::before {
-    content: '';
-    position: absolute;
-    top: -18px;
-    left: 8px;
-    width: 24px;
-    height: 25px;
-    background: linear-gradient(to bottom, #4CAF50, #45a049);
-    border-radius: 50% 50% 0 0;
-    border-left: 3px solid #388E3C;
-    border-right: 3px solid #2E7D32;
-    border-top: 3px solid #388E3C;
-}
-
-
-/* Cactus arms */
-#cactus::after {
-    content: '';
-    position: absolute;
-    top: 25px;
-    left: -12px;
-    width: 18px;
-    height: 10px;
-    background: #45a049;
-    border-radius: 0 5px 5px 0;
-    transform: rotate(10deg);
-    border-top: 2px solid #388E3C;
-    border-right: 2px solid #388E3C;
-    border-bottom: 2px solid #388E3C;
-}
-
-
-/* Second cactus */
 #cactus2 {
-    height: 70px;
-    background: linear-gradient(to right, #45a049, #4CAF50);
-    border-left: 3px solid #2E7D32;
-    border-right: 3px solid #388E3C;
+    background-image: url('cactus2.png'); /* Add mo yung tatlo cactus hehe */
 }
 
-
-/* Second cactus top */
-#cactus2::before {
+.cactus.cactus-img:before {
     content: '';
     position: absolute;
-    top: -15px;
-    left: 8px;
-    width: 24px;
-    height: 20px;
-    background: linear-gradient(to bottom, #45a049, #4CAF50);
-    border-radius: 50% 50% 0 0;
-    border-left: 3px solid #2E7D32;
-    border-right: 3px solid #388E3C;
-    border-top: 3px solid #2E7D32;
+    width: 100%;
+    height: 100%;
+    background-color: #4CAF50;
+    border-radius: 10px;
+    z-index: -1;
+    display: none;
 }
 
-
-/* Second cactus arms */
-#cactus2::after {
-    content: '';
-    position: absolute;
-    top: 18px;
-    right: -12px;
-    width: 18px;
-    height: 10px;
-    background: #4CAF50;
-    border-radius: 5px 0 0 5px;
-    transform: rotate(-10deg);
-    border-top: 2px solid #2E7D32;
-    border-left: 2px solid #2E7D32;
-    border-bottom: 2px solid #2E7D32;
-}
-
-
-/* DINO*/
 .dino {
     position: absolute;
     left: 50px;
@@ -251,30 +334,25 @@ body {
     width: 60px;
     height: 80px;
     z-index: 20;
-    background-image: url("roy.png");
+    background-image: url("roy.png"); 
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: bottom 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-
 
 .dino.jump {
-    bottom: 120px !important;
+    bottom: 100px !important;
 }
 
-
-/* Controls */
 .controls-container {
     margin-top: 20px;
 }
-
 
 .desktop-controls {
     text-align: center;
     margin-bottom: 20px;
 }
-
 
 .control-hint {
     color: #666;
@@ -282,13 +360,11 @@ body {
     font-size: 14px;
 }
 
-
 .control-buttons {
     display: flex;
     justify-content: center;
     gap: 15px;
 }
-
 
 .btn {
     padding: 12px 24px;
@@ -305,17 +381,14 @@ body {
     min-width: 120px;
 }
 
-
 .btn i {
     font-size: 18px;
 }
-
 
 .start-btn {
     background: linear-gradient(to right, #4CAF50, #45a049);
     color: white;
 }
-
 
 .start-btn:hover {
     background: linear-gradient(to right, #45a049, #388E3C);
@@ -323,12 +396,10 @@ body {
     box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
 }
 
-
 .pause-btn {
     background: linear-gradient(to right, #FF9800, #F57C00);
     color: white;
 }
-
 
 .pause-btn:hover {
     background: linear-gradient(to right, #F57C00, #E65100);
@@ -336,12 +407,10 @@ body {
     box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
 }
 
-
 .restart-btn {
     background: linear-gradient(to right, #2196F3, #1976D2);
     color: white;
 }
-
 
 .restart-btn:hover {
     background: linear-gradient(to right, #1976D2, #0D47A1);
@@ -349,18 +418,15 @@ body {
     box-shadow: 0 5px 15px rgba(33, 150, 243, 0.4);
 }
 
-
 /* Mobile controls */
 .mobile-controls {
     display: none;
 }
 
-
 .mobile-jump-container {
     text-align: center;
     margin-bottom: 20px;
 }
-
 
 .mobile-jump-btn {
     width: 80px;
@@ -375,12 +441,10 @@ body {
     transition: all 0.2s ease;
 }
 
-
 .mobile-jump-btn:active {
     transform: scale(0.95);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
-
 
 .mobile-hint {
     margin-top: 10px;
@@ -388,13 +452,11 @@ body {
     font-size: 14px;
 }
 
-
 .mobile-game-buttons {
     display: flex;
     justify-content: center;
     gap: 20px;
 }
-
 
 .mobile-btn {
     width: 60px;
@@ -412,11 +474,9 @@ body {
     transition: all 0.2s ease;
 }
 
-
 .mobile-btn:active {
     transform: scale(0.95);
 }
-
 
 /* Game Over Screen */
 .game-over-screen {
@@ -425,14 +485,13 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.9);
     display: none;
     justify-content: center;
     align-items: center;
     z-index: 100;
     border-radius: 15px;
 }
-
 
 .game-over-content {
     background: white;
@@ -443,7 +502,6 @@ body {
     width: 90%;
     animation: popIn 0.3s ease-out;
 }
-
 
 @keyframes popIn {
     0% {
@@ -456,13 +514,11 @@ body {
     }
 }
 
-
 .game-over-content h2 {
     color: #333;
     margin-bottom: 30px;
     font-size: 32px;
 }
-
 
 .final-score,
 .final-highscore {
@@ -472,13 +528,11 @@ body {
     border-radius: 10px;
 }
 
-
 .score-label {
     color: #666;
     font-size: 14px;
     margin-bottom: 5px;
 }
-
 
 .score-value {
     font-family: 'Courier New', monospace;
@@ -487,21 +541,23 @@ body {
     color: #333;
 }
 
-
-.play-again-btn {
-    background: linear-gradient(to right, #4CAF50, #45a049);
-    color: white;
-    padding: 15px 40px;
+.play-again-btn,
+.change-character-btn {
+    padding: 15px 30px;
     border: none;
     border-radius: 50px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    margin-top: 20px;
+    margin-top: 10px;
     width: 100%;
     transition: all 0.3s ease;
 }
 
+.play-again-btn {
+    background: linear-gradient(to right, #4CAF50, #45a049);
+    color: white;
+}
 
 .play-again-btn:hover {
     background: linear-gradient(to right, #45a049, #388E3C);
@@ -509,6 +565,16 @@ body {
     box-shadow: 0 5px 20px rgba(76, 175, 80, 0.4);
 }
 
+.change-character-btn {
+    background: linear-gradient(to right, #FF9800, #F57C00);
+    color: white;
+}
+
+.change-character-btn:hover {
+    background: linear-gradient(to right, #F57C00, #E65100);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(255, 152, 0, 0.4);
+}
 
 /* Instructions */
 .instructions {
@@ -519,7 +585,6 @@ body {
     text-align: center;
 }
 
-
 .instructions p {
     color: #666;
     margin: 8px 0;
@@ -529,12 +594,10 @@ body {
     gap: 10px;
 }
 
-
 .instructions i {
     color: #4CAF50;
     width: 20px;
 }
-
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -556,7 +619,7 @@ body {
     }
     
     .game-container {
-        height: 250px;
+        height: 180px;
     }
     
     .score-display {
@@ -568,11 +631,20 @@ body {
         font-size: 28px;
     }
     
+    .change-dino-btn {
+        order: -1;
+        width: 100%;
+    }
+    
+    .photo-frame {
+        width: 120px;
+        height: 120px;
+    }
+    
     .dino {
         left: 30px;
     }
 }
-
 
 @media (max-width: 480px) {
     body {
@@ -584,32 +656,12 @@ body {
     }
     
     .game-container {
-        height: 200px;
+        height: 150px;
     }
     
-    .cactus {
+    .cactus.cactus-img {
         width: 30px;
         height: 60px;
-    }
-    
-    #cactus {
-        height: 70px;
-    }
-    
-    #cactus2 {
-        height: 55px;
-    }
-    
-    #cactus::before {
-        top: -14px;
-        width: 18px;
-        height: 20px;
-    }
-    
-    #cactus2::before {
-        top: -12px;
-        width: 18px;
-        height: 16px;
     }
     
     .dino {
@@ -619,9 +671,24 @@ body {
     }
     
     .dino.jump {
-        bottom: 90px !important;
+        bottom: 80px !important;
+    }
+    
+    .photo-booth-content {
+        padding: 20px;
+    }
+    
+    .photo-grid {
+        gap: 15px;
+    }
+    
+    .photo-frame {
+        width: 100px;
+        height: 100px;
     }
 }
+
+
 
 
 
