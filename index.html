@@ -3,25 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Chrome Dino Game</title>
+    <title>Dino Photo Booth Game</title>
     <link rel="stylesheet" href="Dino.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="game-wrapper">
+    <!-- Photo Booth Selection Screen -->
+    <div class="photo-booth-screen" id="photoBoothScreen">
+        <div class="photo-booth-content">
+            <h2>Choose Your Dino!</h2>
+            <p class="booth-subtitle">Pick a character for your adventure</p>
+            
+            <div class="photo-grid">
+                <div class="photo-option" data-img="roy.jpeg">
+                    <div class="photo-frame">
+                        <div class="photo-preview" style="background-image: url('roy.jpeg')"></div>
+                    </div>
+                    <p class="photo-label">Roy</p>
+                </div>
+                
+                <div class="photo-option" data-img="dino2.png">
+                    <div class="photo-frame">
+                        <div class="photo-preview" style="background-color: #ff6b6b"></div>
+                    </div>
+                    <p class="photo-label"></p>
+                </div>
+                
+                <div class="photo-option" data-img="dino3.png">
+                    <div class="photo-frame">
+                        <div class="photo-preview" style="background-color: #4ecdc4"></div>
+                    </div>
+                    <p class="photo-label"></p>
+                </div>
+                
+                <div class="photo-option" data-img="dino4.png">
+                    <div class="photo-frame">
+                        <div class="photo-preview" style="background-color: #ffe66d"></div>
+                    </div>
+                    <p class="photo-label"></p>
+                </div>
+            </div>
+            
+            <div class="booth-controls">
+                <button class="btn start-game-btn" id="boothStartBtn">
+                    <i class="fas fa-play"></i> START GAME
+                </button>
+            </div>
+            
+            <p class="booth-hint">Selected: <span id="selectedDino">Roy</span></p>
+        </div>
+    </div>
+
+    <!-- Main Game (Initially Hidden) -->
+    <div class="game-wrapper" id="gameWrapper" style="display: none;">
         <div class="game-header">
             <div class="score-display">
                 <div id="score">00000</div>
                 <div id="highScore">HI 00000</div>
             </div>
             <div class="game-title">DINO RUN</div>
+            <button class="btn change-dino-btn" id="changeDinoBtn">
+                <i class="fas fa-exchange-alt"></i> CHANGE DINO
+            </button>
         </div>
 
         <div class="game-container">
             <div class="game-screen" id="gameScreen">
                 <div class="dino" id="dino"></div>
-                <div class="cactus" id="cactus"></div>
-                <div class="cactus" id="cactus2"></div>
+                <div class="cactus cactus-img" id="cactus"></div>
+                <div class="cactus cactus-img" id="cactus2"></div>
                 <div class="ground"></div>
                 <div class="cloud"></div>
                 <div class="cloud" style="top: 40px; animation-delay: 3s;"></div>
@@ -79,16 +129,20 @@
                 <button class="btn play-again-btn" id="playAgainBtn">
                     PLAY AGAIN
                 </button>
+                <button class="btn change-character-btn" id="changeCharacterBtn">
+                    CHANGE CHARACTER
+                </button>
             </div>
         </div>
 
         <div class="instructions">
             <p><i class="fas fa-desktop"></i> Desktop: SPACE or UP ARROW to jump</p>
             <p><i class="fas fa-mobile-alt"></i> Mobile: Tap screen or JUMP button</p>
-            <p><i class="fas fa-running"></i> Avoid the cacti to score points</p>
+            <p><i class="fas fa-running"></i> Avoid the obstacles to score points</p>
         </div>
     </div>
 
     <script src="Dino.js"></script>
 </body>
 </html>
+
