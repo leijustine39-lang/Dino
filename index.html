@@ -8,141 +8,144 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Photo Booth Selection Screen -->
-    <div class="photo-booth-screen" id="photoBoothScreen">
-        <div class="photo-booth-content">
-            <h2>Choose Your Dino!</h2>
-            <p class="booth-subtitle">Pick a character for your adventure</p>
-            
-            <div class="photo-grid">
-                <div class="photo-option" data-img="roy.jpeg">
-                    <div class="photo-frame">
-                        <div class="photo-preview" style="background-image: url('roy.jpeg')"></div>
-                    </div>
-                    <p class="photo-label">Roy</p>
-                </div>
-                
-                <div class="photo-option" data-img="dino2.png">
-                    <div class="photo-frame">
-                        <div class="photo-preview" style="background-color: #ff6b6b"></div>
-                    </div>
-                    <p class="photo-label"></p>
-                </div>
-                
-                <div class="photo-option" data-img="dino3.png">
-                    <div class="photo-frame">
-                        <div class="photo-preview" style="background-color: #4ecdc4"></div>
-                    </div>
-                    <p class="photo-label"></p>
-                </div>
-                
-                <div class="photo-option" data-img="dino4.png">
-                    <div class="photo-frame">
-                        <div class="photo-preview" style="background-color: #ffe66d"></div>
-                    </div>
-                    <p class="photo-label"></p>
-                </div>
-            </div>
-            
-            <div class="booth-controls">
-                <button class="btn start-game-btn" id="boothStartBtn">
-                    <i class="fas fa-play"></i> START GAME
-                </button>
-            </div>
-            
-            <p class="booth-hint">Selected: <span id="selectedDino">Roy</span></p>
-        </div>
-    </div>
 
-    <!-- Main Game (Initially Hidden) -->
-    <div class="game-wrapper" id="gameWrapper" style="display: none;">
-        <div class="game-header">
-            <div class="score-display">
-                <div id="score">00000</div>
-                <div id="highScore">HI 00000</div>
+<audio id="bgAudio" loop>
+    <source src="" type="audio/mpeg">
+</audio>
+
+<div class="photo-booth-screen" id="photoBoothScreen">
+    <div class="photo-booth-content">
+        <h2>Choose Your Dino!</h2>
+        <p class="booth-subtitle">Pick a character for your adventure</p>
+        
+        <div class="photo-grid">
+            <div class="photo-option" data-img="roy.jpeg">
+                <div class="photo-frame">
+                    <div class="photo-preview" style="background-image: url('roy.jpeg')"></div>
+                </div>
+                <p class="photo-label">Roy</p>
             </div>
-            <div class="game-title">DINO RUN</div>
-            <button class="btn change-dino-btn" id="changeDinoBtn">
-                <i class="fas fa-exchange-alt"></i> CHANGE DINO
+            
+            <div class="photo-option" data-img="dino2.png">
+                <div class="photo-frame">
+                    <div class="photo-preview" style="background-color: #ff6b6b"></div>
+                </div>
+                <p class="photo-label"></p>
+            </div>
+            
+            <div class="photo-option" data-img="dino3.png">
+                <div class="photo-frame">
+                    <div class="photo-preview" style="background-color: #4ecdc4"></div>
+                </div>
+                <p class="photo-label"></p>
+            </div>
+            
+            <div class="photo-option" data-img="dino4.png">
+                <div class="photo-frame">
+                    <div class="photo-preview" style="background-color: #ffe66d"></div>
+                </div>
+                <p class="photo-label"></p>
+            </div>
+        </div>
+        
+        <div class="booth-controls">
+            <button class="btn start-game-btn" id="boothStartBtn">
+                <i class="fas fa-play"></i> START GAME
             </button>
         </div>
+        
+        <p class="booth-hint">Selected: <span id="selectedDino">Roy</span></p>
+    </div>
+</div>
 
-        <div class="game-container">
-            <div class="game-screen" id="gameScreen">
-                <div class="dino" id="dino"></div>
-                <div class="cactus cactus-img" id="cactus"></div>
-                <div class="cactus cactus-img" id="cactus2"></div>
-                <div class="ground"></div>
-                <div class="cloud"></div>
-                <div class="cloud" style="top: 40px; animation-delay: 3s;"></div>
-            </div>
+<div class="game-wrapper" id="gameWrapper" style="display: none;">
+    <div class="game-header">
+        <div class="score-display">
+            <div id="score">00000</div>
+            <div id="highScore">HI 00000</div>
         </div>
+        <div class="game-title">DINO RUN</div>
+        <button class="btn change-dino-btn" id="changeDinoBtn">
+            <i class="fas fa-exchange-alt"></i> CHANGE DINO
+        </button>
+    </div>
 
-        <div class="controls-container">
-            <div class="desktop-controls">
-                <p class="control-hint">Press SPACE or UP ARROW to jump</p>
-                <div class="control-buttons">
-                    <button class="btn start-btn" id="startBtn">
-                        <i class="fas fa-play"></i> START
-                    </button>
-                    <button class="btn pause-btn" id="pauseBtn" style="display:none;">
-                        <i class="fas fa-pause"></i> PAUSE
-                    </button>
-                    <button class="btn restart-btn" id="restartBtn">
-                        <i class="fas fa-redo"></i> RESTART
-                    </button>
-                </div>
-            </div>
-
-            <div class="mobile-controls">
-                <div class="mobile-jump-container">
-                    <button class="mobile-jump-btn" id="mobileJumpBtn">
-                        <i class="fas fa-arrow-up"></i>
-                    </button>
-                    <p class="mobile-hint">Tap to jump</p>
-                </div>
-                <div class="mobile-game-buttons">
-                    <button class="mobile-btn" id="mobileStartBtn">
-                        <i class="fas fa-play"></i>
-                    </button>
-                    <button class="mobile-btn" id="mobilePauseBtn" style="display:none;">
-                        <i class="fas fa-pause"></i>
-                    </button>
-                    <button class="mobile-btn" id="mobileRestartBtn">
-                        <i class="fas fa-redo"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div class="game-over-screen" id="gameOverScreen">
-            <div class="game-over-content">
-                <h2>GAME OVER</h2>
-                <div class="final-score">
-                    <div class="score-label">SCORE</div>
-                    <div class="score-value" id="finalScore">00000</div>
-                </div>
-                <div class="final-highscore">
-                    <div class="score-label">HIGH SCORE</div>
-                    <div class="score-value" id="finalHighScore">00000</div>
-                </div>
-                <button class="btn play-again-btn" id="playAgainBtn">
-                    PLAY AGAIN
-                </button>
-                <button class="btn change-character-btn" id="changeCharacterBtn">
-                    CHANGE CHARACTER
-                </button>
-            </div>
-        </div>
-
-        <div class="instructions">
-            <p><i class="fas fa-desktop"></i> Desktop: SPACE or UP ARROW to jump</p>
-            <p><i class="fas fa-mobile-alt"></i> Mobile: Tap screen or JUMP button</p>
-            <p><i class="fas fa-running"></i> Avoid the obstacles to score points</p>
+    <div class="game-container">
+        <div class="game-screen" id="gameScreen">
+            <div class="dino" id="dino"></div>
+            <div class="cactus cactus-img" id="cactus"></div>
+            <div class="cactus cactus-img" id="cactus2"></div>
+            <div class="ground"></div>
+            <div class="cloud"></div>
+            <div class="cloud" style="top: 40px; animation-delay: 3s;"></div>
         </div>
     </div>
 
-    <script src="Dino.js"></script>
+    <div class="controls-container">
+        <div class="desktop-controls">
+            <p class="control-hint">Press SPACE or UP ARROW to jump</p>
+            <div class="control-buttons">
+                <button class="btn start-btn" id="startBtn">
+                    <i class="fas fa-play"></i> START
+                </button>
+                <button class="btn pause-btn" id="pauseBtn" style="display:none;">
+                    <i class="fas fa-pause"></i> PAUSE
+                </button>
+                <button class="btn restart-btn" id="restartBtn">
+                    <i class="fas fa-redo"></i> RESTART
+                </button>
+            </div>
+        </div>
+
+        <div class="mobile-controls">
+            <div class="mobile-jump-container">
+                <button class="mobile-jump-btn" id="mobileJumpBtn">
+                    <i class="fas fa-arrow-up"></i>
+                </button>
+                <p class="mobile-hint">Tap to jump</p>
+            </div>
+            <div class="mobile-game-buttons">
+                <button class="mobile-btn" id="mobileStartBtn">
+                    <i class="fas fa-play"></i>
+                </button>
+                <button class="mobile-btn" id="mobilePauseBtn" style="display:none;">
+                    <i class="fas fa-pause"></i>
+                </button>
+                <button class="mobile-btn" id="mobileRestartBtn">
+                    <i class="fas fa-redo"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="game-over-screen" id="gameOverScreen">
+        <div class="game-over-content">
+            <h2>GAME OVER</h2>
+            <div class="final-score">
+                <div class="score-label">SCORE</div>
+                <div class="score-value" id="finalScore">00000</div>
+            </div>
+            <div class="final-highscore">
+                <div class="score-label">HIGH SCORE</div>
+                <div class="score-value" id="finalHighScore">00000</div>
+            </div>
+            <button class="btn play-again-btn" id="playAgainBtn">
+                PLAY AGAIN
+            </button>
+            <button class="btn change-character-btn" id="changeCharacterBtn">
+                CHANGE CHARACTER
+            </button>
+        </div>
+    </div>
+
+    <div class="instructions">
+        <p><i class="fas fa-desktop"></i> Desktop: SPACE or UP ARROW to jump</p>
+        <p><i class="fas fa-mobile-alt"></i> Mobile: Tap screen or JUMP button</p>
+        <p><i class="fas fa-running"></i> Avoid the obstacles to score points</p>
+    </div>
+</div>
+
+<script src="Dino.js"></script>
 </body>
 </html>
 
